@@ -1,0 +1,7 @@
+<configuration scan="false" scanPeriod="15 seconds">
+    <include resource="org/springframework/boot/logging/logback/base.xml"/>
+    <root level="DEBUG">
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="FILE"/>
+    </root>
+</configuration>
