@@ -1,6 +1,5 @@
 package com.codeahoy.server.frontend;
 
-import com.codeahoy.server.message.UserMessage;
 import com.google.common.base.Charsets;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
@@ -24,7 +23,7 @@ public final class Decoder extends ByteToMessageDecoder {
         byte[] bytes = new byte[in.readableBytes()];
         in.readBytes(bytes);
 
-        UserMessage message = UserMessage.newInstance(id, intToString(type), bytes);
+        AlluviumPacket message = AlluviumPacket.newInstanceForBytes(id, intToString(type), bytes);
         out.add(message);
         // in.release(); See http://netty.io/4.0/api/io/netty/handler/codec/ByteToMessageDecoder.html
         // Might cause a memory leak
@@ -38,7 +37,7 @@ public final class Decoder extends ByteToMessageDecoder {
      * @return
      */
     public static String intToString(int a) {
-        byte[] b = new byte[UserMessage.TYPE_LENGTH_IN_CHARS];
+        byte[] b = new byte[AlluviumPacket.TAG_LENGTH_IN_CHARS];
         int count = 0;
 
         for (int i = 3; i > -1; i--) {

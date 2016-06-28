@@ -1,6 +1,5 @@
 package com.codeahoy.server.frontend;
 
-import com.codeahoy.server.message.UserMessage;
 import com.google.common.base.Charsets;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
@@ -12,18 +11,18 @@ import org.slf4j.LoggerFactory;
  *
  * @author umer
  */
-public class Encoder extends MessageToByteEncoder <UserMessage> {
+public class Encoder extends MessageToByteEncoder <AlluviumPacket> {
 
     private static final Logger logger = LoggerFactory.getLogger(Encoder.class);
 
     @Override
-    public void encode(final ChannelHandlerContext paramChannelHandlerContext, final UserMessage message,
+    public void encode(final ChannelHandlerContext paramChannelHandlerContext, final AlluviumPacket message,
                        final ByteBuf out) throws Exception {
         logger.debug("encoding");
-        out.writeIntLE(message.data.length + UserMessage.TYPE_LENGTH_IN_CHARS + 4); /* Length */
-        out.writeIntLE(stringAsInt(message.type));                                  /* Type */
-        out.writeIntLE(message.id);                                                 /* ID */
-        out.writeBytes(message.data);                                               /* Data */
+        out.writeIntLE(message.data.length + AlluviumPacket.TAG_LENGTH_IN_CHARS + 4);  /* Length */
+        out.writeIntLE(stringAsInt(message.tag));                                      /* Tag */
+        out.writeIntLE(message.id);                                                    /* ID */
+        out.writeBytes(message.data);                                                  /* Data */
     }
 
 
@@ -36,7 +35,7 @@ public class Encoder extends MessageToByteEncoder <UserMessage> {
     public static int stringAsInt(String in) {
         byte[] b = in.getBytes(Charsets.US_ASCII);
 
-        if (b.length > UserMessage.TYPE_LENGTH_IN_CHARS) {
+        if (b.length > AlluviumPacket.TAG_LENGTH_IN_CHARS) {
             throw new IllegalArgumentException("The byte array must have at most 4 bytes.");
         }
 

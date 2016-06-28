@@ -1,5 +1,7 @@
 package com.codeahoy.server.frontend;
 
+import com.codeahoy.server.frontend.messages.Message;
+import com.codeahoy.server.frontend.messages.Time;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
@@ -32,8 +34,10 @@ public class ServerHandler extends ChannelInboundHandlerAdapter {
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
         executorService.submit( () -> {
-            logger.debug("new message from [{}]", ctx.channel());
-            ctx.channel().writeAndFlush(msg);
+            logger.debug("new messages from [{}]", ctx.channel());
+            Time time = new Time();
+            AlluviumPacket packet = AlluviumPacket.newInstanceForMessage(1, "time", time);
+            ctx.channel().writeAndFlush(packet);
              ;
             });
     }

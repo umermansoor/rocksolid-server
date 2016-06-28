@@ -57,12 +57,13 @@ public class ServerConfiguration {
             protected void initChannel(SocketChannel ch) throws Exception {
                 ch.pipeline().addLast(
                         new LoggingHandler(LogLevel.DEBUG),
-                        new LengthFieldBasedFrameDecoder(ByteOrder.LITTLE_ENDIAN,
-                                Integer.MAX_VALUE,
-                                0,
-                                4,
-                                0,
-                                4,
+                        new LengthFieldBasedFrameDecoder(
+                                ByteOrder.LITTLE_ENDIAN,
+                                Integer.MAX_VALUE, /* Max Frame Length */
+                                0,                 /* Length field starts at 0th byte */
+                                4,                 /* Length field in an Integer, so 4 bytes */
+                                0,                 /* no adjustment */
+                                4,                 /* Strip out the length field */
                                 false),
                         new Decoder(),
                         new Encoder(),
