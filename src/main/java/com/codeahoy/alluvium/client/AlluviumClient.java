@@ -1,8 +1,6 @@
 package com.codeahoy.alluvium.client;
 
-import com.codeahoy.alluvium.server.frontend.AlluviumPacket;
-import com.codeahoy.alluvium.server.frontend.Decoder;
-import com.codeahoy.alluvium.server.frontend.Encoder;
+import com.codeahoy.alluvium.protocol.AlluviumProtocol;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;
@@ -12,12 +10,15 @@ import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.handler.codec.LengthFieldBasedFrameDecoder;
+import io.netty.handler.codec.LengthFieldPrepender;
+import io.netty.handler.codec.protobuf.ProtobufDecoder;
+import io.netty.handler.codec.protobuf.ProtobufEncoder;
 import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.nio.ByteOrder;
+import java.util.UUID;
 
 /**
  * Alluvium client. For demonstration.
@@ -41,16 +42,10 @@ public class AlluviumClient {
                 public void initChannel(SocketChannel ch) throws Exception {
                     ch.pipeline().addLast(
                             new LoggingHandler(LogLevel.DEBUG),
-                            new LengthFieldBasedFrameDecoder(
-                                    ByteOrder.LITTLE_ENDIAN,
-                                    Integer.MAX_VALUE, /* Max Frame Length */
-                                    0,                 /* Length field starts at 0th byte */
-                                    4,                 /* Length field in an Integer, so 4 bytes */
-                                    0,                 /* no adjustment */
-                                    4,                 /* Strip out the length field */
-                                    false),
-                            new Decoder(),
-                            new Encoder(),
+                            new LengthFieldBasedFrameDecoder(1048576, 0, 4, 0, 4),
+                            new ProtobufDecoder(AlluviumProtocol.Response.getDefaultInstance()),
+                            new LengthFieldPrepender(4),
+                            new ProtobufEncoder(),
                             clientHandler);
                 }
             });
@@ -60,8 +55,17 @@ public class AlluviumClient {
             logger.debug("connecting to the server {} on port {}.", host, port);
 
             // Request current time
-            AlluviumPacket alluviumPacket =  AlluviumPacket.newInstanceForBytes(1, "time", null);
-            f.channel().writeAndFlush(alluviumPacket).sync();
+            AlluviumProtocol.ServerTimeRequest serverTimeRequest =
+                    AlluviumProtocol.ServerTimeRequest.newBuilder()
+                            .setRequestId(UUID.randomUUID().toString())
+                            .build();
+
+            AlluviumProtocol.Request request = AlluviumProtocol.Request.newBuilder()
+                    .setServerTime(serverTimeRequest)
+                    .setType(AlluviumProtocol.Request.Type.SERVERTIME)
+                    .build();
+
+            f.channel().writeAndFlush(request);
 
             // Wait for the connection to be closed.
             f.channel().closeFuture().sync();
