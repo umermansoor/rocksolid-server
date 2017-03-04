@@ -7,7 +7,6 @@ import io.netty.channel.SimpleChannelInboundHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.concurrent.ThreadPoolExecutorFactoryBean;
 import org.springframework.stereotype.Component;
 import javax.annotation.PostConstruct;
@@ -20,15 +19,12 @@ import java.util.concurrent.ExecutorService;
 @Component
 @ChannelHandler.Sharable
 public class ServerHandler extends SimpleChannelInboundHandler<AlluviumProtocol.Request> {
-    private static final Logger logger = LoggerFactory.getLogger(ServerHandler.class);
-
-    @Value("${name}")
-    public String name;
-
     @Autowired
     private ThreadPoolExecutorFactoryBean threadPoolExecutorFactoryBean;
 
     private ExecutorService executorService;
+
+    private static final Logger logger = LoggerFactory.getLogger(ServerHandler.class);
 
     @PostConstruct
     public void initialize() {
