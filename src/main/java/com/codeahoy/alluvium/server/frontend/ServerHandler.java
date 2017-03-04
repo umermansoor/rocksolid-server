@@ -1,13 +1,13 @@
-package com.codeahoy.server.frontend;
+package com.codeahoy.alluvium.server.frontend;
 
-import com.codeahoy.server.frontend.messages.Message;
-import com.codeahoy.server.frontend.messages.Time;
+import com.codeahoy.alluvium.server.frontend.messages.Time;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.concurrent.ThreadPoolExecutorFactoryBean;
 import org.springframework.stereotype.Component;
 import javax.annotation.PostConstruct;
@@ -20,6 +20,9 @@ import java.util.concurrent.ExecutorService;
 @ChannelHandler.Sharable
 public class ServerHandler extends ChannelInboundHandlerAdapter {
     private static final Logger logger = LoggerFactory.getLogger(ServerHandler.class);
+
+    @Value("${name}")
+    public String name;
 
     @Autowired
     private ThreadPoolExecutorFactoryBean threadPoolExecutorFactoryBean;

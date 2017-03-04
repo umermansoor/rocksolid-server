@@ -1,6 +1,8 @@
-package com.codeahoy.client;
+package com.codeahoy.alluvium.client;
 
-import com.codeahoy.server.frontend.AlluviumPacket;
+import com.codeahoy.alluvium.server.frontend.AlluviumPacket;
+import com.codeahoy.alluvium.server.frontend.Decoder;
+import com.codeahoy.alluvium.server.frontend.Encoder;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;
@@ -12,8 +14,6 @@ import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.handler.codec.LengthFieldBasedFrameDecoder;
 import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
-import com.codeahoy.server.frontend.Decoder;
-import com.codeahoy.server.frontend.Encoder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

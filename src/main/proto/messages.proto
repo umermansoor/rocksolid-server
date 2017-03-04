@@ -1,0 +1,20 @@
+/**
+* To generate files, run the following command in this directory:
+* protoc --java_out=../java  messages.proto
+*/
+
+syntax = "proto3";
+
+package com.codeahoy.alluvium.message;
+
+option java_package = "com.codeahoy.alluvium.message";
+option java_outer_classname = "AlluviumMessages";
+
+message ServerTimeRequest {
+    string request_id = 1;
+}
+
+message ServerTimeResponse {
+    string request_id = 1;
+    string server_time = 2;
+}

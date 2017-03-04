@@ -33,9 +33,9 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter</artifactId>
+    </dependency>
 
         <dependency>
             <groupId>org.slf4j</groupId>
@@ -43,6 +43,12 @@
             <version>${slf4j.version}</version>
             <type>pom</type>
             <scope>import</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.google.protobuf</groupId>
+            <artifactId>protobuf-java</artifactId>
+            <version>3.1.0</version>
         </dependency>
 
         <dependency>

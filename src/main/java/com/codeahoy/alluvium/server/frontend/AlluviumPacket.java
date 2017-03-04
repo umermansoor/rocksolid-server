@@ -1,7 +1,7 @@
-package com.codeahoy.server.frontend;
+package com.codeahoy.alluvium.server.frontend;
 
-import com.codeahoy.server.frontend.messages.Message;
-import com.codeahoy.server.frontend.messages.Time;
+import com.codeahoy.alluvium.server.frontend.messages.Time;
+import com.codeahoy.alluvium.server.frontend.messages.Message;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import de.undercouch.bson4jackson.BsonFactory;

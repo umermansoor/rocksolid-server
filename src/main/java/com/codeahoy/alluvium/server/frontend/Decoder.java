@@ -1,4 +1,4 @@
-package com.codeahoy.server.frontend;
+package com.codeahoy.alluvium.server.frontend;
 
 import com.google.common.base.Charsets;
 import io.netty.buffer.ByteBuf;

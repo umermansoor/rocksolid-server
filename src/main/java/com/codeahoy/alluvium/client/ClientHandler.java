@@ -1,6 +1,6 @@
-package com.codeahoy.client;
+package com.codeahoy.alluvium.client;
 
-import com.codeahoy.server.frontend.AlluviumPacket;
+import com.codeahoy.alluvium.server.frontend.AlluviumPacket;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;

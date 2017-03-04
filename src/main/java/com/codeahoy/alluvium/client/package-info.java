@@ -3,4 +3,4 @@
  *
  * @author umansoor
  */
-package com.codeahoy.client;
+package com.codeahoy.alluvium.client;

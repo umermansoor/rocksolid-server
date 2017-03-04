@@ -1,4 +1,4 @@
-package com.codeahoy.server;
+package com.codeahoy.alluvium.server;
 
 import org.springframework.boot.Banner;
 import org.springframework.boot.SpringApplication;

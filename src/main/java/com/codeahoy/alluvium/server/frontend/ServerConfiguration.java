@@ -1,4 +1,4 @@
-package com.codeahoy.server.frontend;
+package com.codeahoy.alluvium.server.frontend;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelInitializer;

@@ -1,4 +1,4 @@
-package com.codeahoy.server.frontend.messages;
+package com.codeahoy.alluvium.server.frontend.messages;
 
 import java.util.Date;
 
