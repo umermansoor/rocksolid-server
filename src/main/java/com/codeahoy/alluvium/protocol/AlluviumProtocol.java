@@ -36,6 +36,15 @@ public final class AlluviumProtocol {
      */
     com.codeahoy.alluvium.protocol.AlluviumProtocol.ServerTimeRequestOrBuilder getServerTimeOrBuilder();
 
+    /**
+     * <code>.com.codeahoy.alluvium.message.LoginRequest login_request = 3;</code>
+     */
+    com.codeahoy.alluvium.protocol.AlluviumProtocol.LoginRequest getLoginRequest();
+    /**
+     * <code>.com.codeahoy.alluvium.message.LoginRequest login_request = 3;</code>
+     */
+    com.codeahoy.alluvium.protocol.AlluviumProtocol.LoginRequestOrBuilder getLoginRequestOrBuilder();
+
     public com.codeahoy.alluvium.protocol.AlluviumProtocol.Request.RequestCase getRequestCase();
   }
   /**
@@ -96,6 +105,20 @@ public final class AlluviumProtocol {
                 request_ = subBuilder.buildPartial();
               }
               requestCase_ = 2;
+              break;
+            }
+            case 26: {
+              com.codeahoy.alluvium.protocol.AlluviumProtocol.LoginRequest.Builder subBuilder = null;
+              if (requestCase_ == 3) {
+                subBuilder = ((com.codeahoy.alluvium.protocol.AlluviumProtocol.LoginRequest) request_).toBuilder();
+              }
+              request_ =
+                  input.readMessage(com.codeahoy.alluvium.protocol.AlluviumProtocol.LoginRequest.parser(), extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom((com.codeahoy.alluvium.protocol.AlluviumProtocol.LoginRequest) request_);
+                request_ = subBuilder.buildPartial();
+              }
+              requestCase_ = 3;
               break;
             }
           }
@@ -224,6 +247,7 @@ public final class AlluviumProtocol {
     public enum RequestCase
         implements com.google.protobuf.Internal.EnumLite {
       SERVER_TIME(2),
+      LOGIN_REQUEST(3),
       REQUEST_NOT_SET(0);
       private final int value;
       private RequestCase(int value) {
@@ -240,6 +264,7 @@ public final class AlluviumProtocol {
       public static RequestCase forNumber(int value) {
         switch (value) {
           case 2: return SERVER_TIME;
+          case 3: return LOGIN_REQUEST;
           case 0: return REQUEST_NOT_SET;
           default: return null;
         }
@@ -291,6 +316,26 @@ public final class AlluviumProtocol {
       return com.codeahoy.alluvium.protocol.AlluviumProtocol.ServerTimeRequest.getDefaultInstance();
     }
 
+    public static final int LOGIN_REQUEST_FIELD_NUMBER = 3;
+    /**
+     * <code>.com.codeahoy.alluvium.message.LoginRequest login_request = 3;</code>
+     */
+    public com.codeahoy.alluvium.protocol.AlluviumProtocol.LoginRequest getLoginRequest() {
+      if (requestCase_ == 3) {
+         return (com.codeahoy.alluvium.protocol.AlluviumProtocol.LoginRequest) request_;
+      }
+      return com.codeahoy.alluvium.protocol.AlluviumProtocol.LoginRequest.getDefaultInstance();
+    }
+    /**
+     * <code>.com.codeahoy.alluvium.message.LoginRequest login_request = 3;</code>
+     */
+    public com.codeahoy.alluvium.protocol.AlluviumProtocol.LoginRequestOrBuilder getLoginRequestOrBuilder() {
+      if (requestCase_ == 3) {
+         return (com.codeahoy.alluvium.protocol.AlluviumProtocol.LoginRequest) request_;
+      }
+      return com.codeahoy.alluvium.protocol.AlluviumProtocol.LoginRequest.getDefaultInstance();
+    }
+
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
@@ -309,6 +354,9 @@ public final class AlluviumProtocol {
       if (requestCase_ == 2) {
         output.writeMessage(2, (com.codeahoy.alluvium.protocol.AlluviumProtocol.ServerTimeRequest) request_);
       }
+      if (requestCase_ == 3) {
+        output.writeMessage(3, (com.codeahoy.alluvium.protocol.AlluviumProtocol.LoginRequest) request_);
+      }
     }
 
     public int getSerializedSize() {
@@ -323,6 +371,10 @@ public final class AlluviumProtocol {
       if (requestCase_ == 2) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(2, (com.codeahoy.alluvium.protocol.AlluviumProtocol.ServerTimeRequest) request_);
+      }
+      if (requestCase_ == 3) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(3, (com.codeahoy.alluvium.protocol.AlluviumProtocol.LoginRequest) request_);
       }
       memoizedSize = size;
       return size;
@@ -349,6 +401,10 @@ public final class AlluviumProtocol {
           result = result && getServerTime()
               .equals(other.getServerTime());
           break;
+        case 3:
+          result = result && getLoginRequest()
+              .equals(other.getLoginRequest());
+          break;
         case 0:
         default:
       }
@@ -368,6 +424,10 @@ public final class AlluviumProtocol {
         case 2:
           hash = (37 * hash) + SERVER_TIME_FIELD_NUMBER;
           hash = (53 * hash) + getServerTime().hashCode();
+          break;
+        case 3:
+          hash = (37 * hash) + LOGIN_REQUEST_FIELD_NUMBER;
+          hash = (53 * hash) + getLoginRequest().hashCode();
           break;
         case 0:
         default:
@@ -524,6 +584,13 @@ public final class AlluviumProtocol {
             result.request_ = serverTimeBuilder_.build();
           }
         }
+        if (requestCase_ == 3) {
+          if (loginRequestBuilder_ == null) {
+            result.request_ = request_;
+          } else {
+            result.request_ = loginRequestBuilder_.build();
+          }
+        }
         result.requestCase_ = requestCase_;
         onBuilt();
         return result;
@@ -572,6 +639,10 @@ public final class AlluviumProtocol {
         switch (other.getRequestCase()) {
           case SERVER_TIME: {
             mergeServerTime(other.getServerTime());
+            break;
+          }
+          case LOGIN_REQUEST: {
+            mergeLoginRequest(other.getLoginRequest());
             break;
           }
           case REQUEST_NOT_SET: {
@@ -791,6 +862,136 @@ public final class AlluviumProtocol {
         requestCase_ = 2;
         onChanged();;
         return serverTimeBuilder_;
+      }
+
+      private com.google.protobuf.SingleFieldBuilderV3<
+          com.codeahoy.alluvium.protocol.AlluviumProtocol.LoginRequest, com.codeahoy.alluvium.protocol.AlluviumProtocol.LoginRequest.Builder, com.codeahoy.alluvium.protocol.AlluviumProtocol.LoginRequestOrBuilder> loginRequestBuilder_;
+      /**
+       * <code>.com.codeahoy.alluvium.message.LoginRequest login_request = 3;</code>
+       */
+      public com.codeahoy.alluvium.protocol.AlluviumProtocol.LoginRequest getLoginRequest() {
+        if (loginRequestBuilder_ == null) {
+          if (requestCase_ == 3) {
+            return (com.codeahoy.alluvium.protocol.AlluviumProtocol.LoginRequest) request_;
+          }
+          return com.codeahoy.alluvium.protocol.AlluviumProtocol.LoginRequest.getDefaultInstance();
+        } else {
+          if (requestCase_ == 3) {
+            return loginRequestBuilder_.getMessage();
+          }
+          return com.codeahoy.alluvium.protocol.AlluviumProtocol.LoginRequest.getDefaultInstance();
+        }
+      }
+      /**
+       * <code>.com.codeahoy.alluvium.message.LoginRequest login_request = 3;</code>
+       */
+      public Builder setLoginRequest(com.codeahoy.alluvium.protocol.AlluviumProtocol.LoginRequest value) {
+        if (loginRequestBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          request_ = value;
+          onChanged();
+        } else {
+          loginRequestBuilder_.setMessage(value);
+        }
+        requestCase_ = 3;
+        return this;
+      }
+      /**
+       * <code>.com.codeahoy.alluvium.message.LoginRequest login_request = 3;</code>
+       */
+      public Builder setLoginRequest(
+          com.codeahoy.alluvium.protocol.AlluviumProtocol.LoginRequest.Builder builderForValue) {
+        if (loginRequestBuilder_ == null) {
+          request_ = builderForValue.build();
+          onChanged();
+        } else {
+          loginRequestBuilder_.setMessage(builderForValue.build());
+        }
+        requestCase_ = 3;
+        return this;
+      }
+      /**
+       * <code>.com.codeahoy.alluvium.message.LoginRequest login_request = 3;</code>
+       */
+      public Builder mergeLoginRequest(com.codeahoy.alluvium.protocol.AlluviumProtocol.LoginRequest value) {
+        if (loginRequestBuilder_ == null) {
+          if (requestCase_ == 3 &&
+              request_ != com.codeahoy.alluvium.protocol.AlluviumProtocol.LoginRequest.getDefaultInstance()) {
+            request_ = com.codeahoy.alluvium.protocol.AlluviumProtocol.LoginRequest.newBuilder((com.codeahoy.alluvium.protocol.AlluviumProtocol.LoginRequest) request_)
+                .mergeFrom(value).buildPartial();
+          } else {
+            request_ = value;
+          }
+          onChanged();
+        } else {
+          if (requestCase_ == 3) {
+            loginRequestBuilder_.mergeFrom(value);
+          }
+          loginRequestBuilder_.setMessage(value);
+        }
+        requestCase_ = 3;
+        return this;
+      }
+      /**
+       * <code>.com.codeahoy.alluvium.message.LoginRequest login_request = 3;</code>
+       */
+      public Builder clearLoginRequest() {
+        if (loginRequestBuilder_ == null) {
+          if (requestCase_ == 3) {
+            requestCase_ = 0;
+            request_ = null;
+            onChanged();
+          }
+        } else {
+          if (requestCase_ == 3) {
+            requestCase_ = 0;
+            request_ = null;
+          }
+          loginRequestBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>.com.codeahoy.alluvium.message.LoginRequest login_request = 3;</code>
+       */
+      public com.codeahoy.alluvium.protocol.AlluviumProtocol.LoginRequest.Builder getLoginRequestBuilder() {
+        return getLoginRequestFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>.com.codeahoy.alluvium.message.LoginRequest login_request = 3;</code>
+       */
+      public com.codeahoy.alluvium.protocol.AlluviumProtocol.LoginRequestOrBuilder getLoginRequestOrBuilder() {
+        if ((requestCase_ == 3) && (loginRequestBuilder_ != null)) {
+          return loginRequestBuilder_.getMessageOrBuilder();
+        } else {
+          if (requestCase_ == 3) {
+            return (com.codeahoy.alluvium.protocol.AlluviumProtocol.LoginRequest) request_;
+          }
+          return com.codeahoy.alluvium.protocol.AlluviumProtocol.LoginRequest.getDefaultInstance();
+        }
+      }
+      /**
+       * <code>.com.codeahoy.alluvium.message.LoginRequest login_request = 3;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          com.codeahoy.alluvium.protocol.AlluviumProtocol.LoginRequest, com.codeahoy.alluvium.protocol.AlluviumProtocol.LoginRequest.Builder, com.codeahoy.alluvium.protocol.AlluviumProtocol.LoginRequestOrBuilder> 
+          getLoginRequestFieldBuilder() {
+        if (loginRequestBuilder_ == null) {
+          if (!(requestCase_ == 3)) {
+            request_ = com.codeahoy.alluvium.protocol.AlluviumProtocol.LoginRequest.getDefaultInstance();
+          }
+          loginRequestBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              com.codeahoy.alluvium.protocol.AlluviumProtocol.LoginRequest, com.codeahoy.alluvium.protocol.AlluviumProtocol.LoginRequest.Builder, com.codeahoy.alluvium.protocol.AlluviumProtocol.LoginRequestOrBuilder>(
+                  (com.codeahoy.alluvium.protocol.AlluviumProtocol.LoginRequest) request_,
+                  getParentForChildren(),
+                  isClean());
+          request_ = null;
+        }
+        requestCase_ = 3;
+        onChanged();;
+        return loginRequestBuilder_;
       }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
@@ -1344,6 +1545,646 @@ public final class AlluviumProtocol {
 
   }
 
+  public interface LoginRequestOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.codeahoy.alluvium.message.LoginRequest)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>string request_id = 1;</code>
+     */
+    java.lang.String getRequestId();
+    /**
+     * <code>string request_id = 1;</code>
+     */
+    com.google.protobuf.ByteString
+        getRequestIdBytes();
+
+    /**
+     * <code>string id = 2;</code>
+     */
+    java.lang.String getId();
+    /**
+     * <code>string id = 2;</code>
+     */
+    com.google.protobuf.ByteString
+        getIdBytes();
+  }
+  /**
+   * Protobuf type {@code com.codeahoy.alluvium.message.LoginRequest}
+   */
+  public  static final class LoginRequest extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:com.codeahoy.alluvium.message.LoginRequest)
+      LoginRequestOrBuilder {
+    // Use LoginRequest.newBuilder() to construct.
+    private LoginRequest(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private LoginRequest() {
+      requestId_ = "";
+      id_ = "";
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+    }
+    private LoginRequest(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      int mutable_bitField0_ = 0;
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!input.skipField(tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              requestId_ = s;
+              break;
+            }
+            case 18: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              id_ = s;
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.codeahoy.alluvium.protocol.AlluviumProtocol.internal_static_com_codeahoy_alluvium_message_LoginRequest_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.codeahoy.alluvium.protocol.AlluviumProtocol.internal_static_com_codeahoy_alluvium_message_LoginRequest_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.codeahoy.alluvium.protocol.AlluviumProtocol.LoginRequest.class, com.codeahoy.alluvium.protocol.AlluviumProtocol.LoginRequest.Builder.class);
+    }
+
+    public static final int REQUEST_ID_FIELD_NUMBER = 1;
+    private volatile java.lang.Object requestId_;
+    /**
+     * <code>string request_id = 1;</code>
+     */
+    public java.lang.String getRequestId() {
+      java.lang.Object ref = requestId_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        requestId_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string request_id = 1;</code>
+     */
+    public com.google.protobuf.ByteString
+        getRequestIdBytes() {
+      java.lang.Object ref = requestId_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        requestId_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int ID_FIELD_NUMBER = 2;
+    private volatile java.lang.Object id_;
+    /**
+     * <code>string id = 2;</code>
+     */
+    public java.lang.String getId() {
+      java.lang.Object ref = id_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        id_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string id = 2;</code>
+     */
+    public com.google.protobuf.ByteString
+        getIdBytes() {
+      java.lang.Object ref = id_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        id_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (!getRequestIdBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, requestId_);
+      }
+      if (!getIdBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, id_);
+      }
+    }
+
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (!getRequestIdBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, requestId_);
+      }
+      if (!getIdBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, id_);
+      }
+      memoizedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof com.codeahoy.alluvium.protocol.AlluviumProtocol.LoginRequest)) {
+        return super.equals(obj);
+      }
+      com.codeahoy.alluvium.protocol.AlluviumProtocol.LoginRequest other = (com.codeahoy.alluvium.protocol.AlluviumProtocol.LoginRequest) obj;
+
+      boolean result = true;
+      result = result && getRequestId()
+          .equals(other.getRequestId());
+      result = result && getId()
+          .equals(other.getId());
+      return result;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (37 * hash) + REQUEST_ID_FIELD_NUMBER;
+      hash = (53 * hash) + getRequestId().hashCode();
+      hash = (37 * hash) + ID_FIELD_NUMBER;
+      hash = (53 * hash) + getId().hashCode();
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static com.codeahoy.alluvium.protocol.AlluviumProtocol.LoginRequest parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.codeahoy.alluvium.protocol.AlluviumProtocol.LoginRequest parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.codeahoy.alluvium.protocol.AlluviumProtocol.LoginRequest parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.codeahoy.alluvium.protocol.AlluviumProtocol.LoginRequest parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.codeahoy.alluvium.protocol.AlluviumProtocol.LoginRequest parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.codeahoy.alluvium.protocol.AlluviumProtocol.LoginRequest parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.codeahoy.alluvium.protocol.AlluviumProtocol.LoginRequest parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static com.codeahoy.alluvium.protocol.AlluviumProtocol.LoginRequest parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.codeahoy.alluvium.protocol.AlluviumProtocol.LoginRequest parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.codeahoy.alluvium.protocol.AlluviumProtocol.LoginRequest parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(com.codeahoy.alluvium.protocol.AlluviumProtocol.LoginRequest prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code com.codeahoy.alluvium.message.LoginRequest}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.codeahoy.alluvium.message.LoginRequest)
+        com.codeahoy.alluvium.protocol.AlluviumProtocol.LoginRequestOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.codeahoy.alluvium.protocol.AlluviumProtocol.internal_static_com_codeahoy_alluvium_message_LoginRequest_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.codeahoy.alluvium.protocol.AlluviumProtocol.internal_static_com_codeahoy_alluvium_message_LoginRequest_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.codeahoy.alluvium.protocol.AlluviumProtocol.LoginRequest.class, com.codeahoy.alluvium.protocol.AlluviumProtocol.LoginRequest.Builder.class);
+      }
+
+      // Construct using com.codeahoy.alluvium.protocol.AlluviumProtocol.LoginRequest.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      public Builder clear() {
+        super.clear();
+        requestId_ = "";
+
+        id_ = "";
+
+        return this;
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.codeahoy.alluvium.protocol.AlluviumProtocol.internal_static_com_codeahoy_alluvium_message_LoginRequest_descriptor;
+      }
+
+      public com.codeahoy.alluvium.protocol.AlluviumProtocol.LoginRequest getDefaultInstanceForType() {
+        return com.codeahoy.alluvium.protocol.AlluviumProtocol.LoginRequest.getDefaultInstance();
+      }
+
+      public com.codeahoy.alluvium.protocol.AlluviumProtocol.LoginRequest build() {
+        com.codeahoy.alluvium.protocol.AlluviumProtocol.LoginRequest result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.codeahoy.alluvium.protocol.AlluviumProtocol.LoginRequest buildPartial() {
+        com.codeahoy.alluvium.protocol.AlluviumProtocol.LoginRequest result = new com.codeahoy.alluvium.protocol.AlluviumProtocol.LoginRequest(this);
+        result.requestId_ = requestId_;
+        result.id_ = id_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder clone() {
+        return (Builder) super.clone();
+      }
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return (Builder) super.setField(field, value);
+      }
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return (Builder) super.clearField(field);
+      }
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return (Builder) super.clearOneof(oneof);
+      }
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, Object value) {
+        return (Builder) super.setRepeatedField(field, index, value);
+      }
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return (Builder) super.addRepeatedField(field, value);
+      }
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.codeahoy.alluvium.protocol.AlluviumProtocol.LoginRequest) {
+          return mergeFrom((com.codeahoy.alluvium.protocol.AlluviumProtocol.LoginRequest)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.codeahoy.alluvium.protocol.AlluviumProtocol.LoginRequest other) {
+        if (other == com.codeahoy.alluvium.protocol.AlluviumProtocol.LoginRequest.getDefaultInstance()) return this;
+        if (!other.getRequestId().isEmpty()) {
+          requestId_ = other.requestId_;
+          onChanged();
+        }
+        if (!other.getId().isEmpty()) {
+          id_ = other.id_;
+          onChanged();
+        }
+        onChanged();
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.codeahoy.alluvium.protocol.AlluviumProtocol.LoginRequest parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.codeahoy.alluvium.protocol.AlluviumProtocol.LoginRequest) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+
+      private java.lang.Object requestId_ = "";
+      /**
+       * <code>string request_id = 1;</code>
+       */
+      public java.lang.String getRequestId() {
+        java.lang.Object ref = requestId_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          requestId_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string request_id = 1;</code>
+       */
+      public com.google.protobuf.ByteString
+          getRequestIdBytes() {
+        java.lang.Object ref = requestId_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          requestId_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string request_id = 1;</code>
+       */
+      public Builder setRequestId(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        requestId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string request_id = 1;</code>
+       */
+      public Builder clearRequestId() {
+        
+        requestId_ = getDefaultInstance().getRequestId();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string request_id = 1;</code>
+       */
+      public Builder setRequestIdBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        requestId_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object id_ = "";
+      /**
+       * <code>string id = 2;</code>
+       */
+      public java.lang.String getId() {
+        java.lang.Object ref = id_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          id_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string id = 2;</code>
+       */
+      public com.google.protobuf.ByteString
+          getIdBytes() {
+        java.lang.Object ref = id_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          id_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string id = 2;</code>
+       */
+      public Builder setId(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        id_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string id = 2;</code>
+       */
+      public Builder clearId() {
+        
+        id_ = getDefaultInstance().getId();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string id = 2;</code>
+       */
+      public Builder setIdBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        id_ = value;
+        onChanged();
+        return this;
+      }
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return this;
+      }
+
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return this;
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:com.codeahoy.alluvium.message.LoginRequest)
+    }
+
+    // @@protoc_insertion_point(class_scope:com.codeahoy.alluvium.message.LoginRequest)
+    private static final com.codeahoy.alluvium.protocol.AlluviumProtocol.LoginRequest DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new com.codeahoy.alluvium.protocol.AlluviumProtocol.LoginRequest();
+    }
+
+    public static com.codeahoy.alluvium.protocol.AlluviumProtocol.LoginRequest getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<LoginRequest>
+        PARSER = new com.google.protobuf.AbstractParser<LoginRequest>() {
+      public LoginRequest parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+          return new LoginRequest(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<LoginRequest> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<LoginRequest> getParserForType() {
+      return PARSER;
+    }
+
+    public com.codeahoy.alluvium.protocol.AlluviumProtocol.LoginRequest getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
   public interface ResponseOrBuilder extends
       // @@protoc_insertion_point(interface_extends:com.codeahoy.alluvium.message.Response)
       com.google.protobuf.MessageOrBuilder {
@@ -1365,6 +2206,15 @@ public final class AlluviumProtocol {
      * <code>.com.codeahoy.alluvium.message.ServerTimeResponse server_time = 2;</code>
      */
     com.codeahoy.alluvium.protocol.AlluviumProtocol.ServerTimeResponseOrBuilder getServerTimeOrBuilder();
+
+    /**
+     * <code>.com.codeahoy.alluvium.message.LoginResponse login_response = 3;</code>
+     */
+    com.codeahoy.alluvium.protocol.AlluviumProtocol.LoginResponse getLoginResponse();
+    /**
+     * <code>.com.codeahoy.alluvium.message.LoginResponse login_response = 3;</code>
+     */
+    com.codeahoy.alluvium.protocol.AlluviumProtocol.LoginResponseOrBuilder getLoginResponseOrBuilder();
 
     public com.codeahoy.alluvium.protocol.AlluviumProtocol.Response.RequestCase getRequestCase();
   }
@@ -1426,6 +2276,20 @@ public final class AlluviumProtocol {
                 request_ = subBuilder.buildPartial();
               }
               requestCase_ = 2;
+              break;
+            }
+            case 26: {
+              com.codeahoy.alluvium.protocol.AlluviumProtocol.LoginResponse.Builder subBuilder = null;
+              if (requestCase_ == 3) {
+                subBuilder = ((com.codeahoy.alluvium.protocol.AlluviumProtocol.LoginResponse) request_).toBuilder();
+              }
+              request_ =
+                  input.readMessage(com.codeahoy.alluvium.protocol.AlluviumProtocol.LoginResponse.parser(), extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom((com.codeahoy.alluvium.protocol.AlluviumProtocol.LoginResponse) request_);
+                request_ = subBuilder.buildPartial();
+              }
+              requestCase_ = 3;
               break;
             }
           }
@@ -1554,6 +2418,7 @@ public final class AlluviumProtocol {
     public enum RequestCase
         implements com.google.protobuf.Internal.EnumLite {
       SERVER_TIME(2),
+      LOGIN_RESPONSE(3),
       REQUEST_NOT_SET(0);
       private final int value;
       private RequestCase(int value) {
@@ -1570,6 +2435,7 @@ public final class AlluviumProtocol {
       public static RequestCase forNumber(int value) {
         switch (value) {
           case 2: return SERVER_TIME;
+          case 3: return LOGIN_RESPONSE;
           case 0: return REQUEST_NOT_SET;
           default: return null;
         }
@@ -1621,6 +2487,26 @@ public final class AlluviumProtocol {
       return com.codeahoy.alluvium.protocol.AlluviumProtocol.ServerTimeResponse.getDefaultInstance();
     }
 
+    public static final int LOGIN_RESPONSE_FIELD_NUMBER = 3;
+    /**
+     * <code>.com.codeahoy.alluvium.message.LoginResponse login_response = 3;</code>
+     */
+    public com.codeahoy.alluvium.protocol.AlluviumProtocol.LoginResponse getLoginResponse() {
+      if (requestCase_ == 3) {
+         return (com.codeahoy.alluvium.protocol.AlluviumProtocol.LoginResponse) request_;
+      }
+      return com.codeahoy.alluvium.protocol.AlluviumProtocol.LoginResponse.getDefaultInstance();
+    }
+    /**
+     * <code>.com.codeahoy.alluvium.message.LoginResponse login_response = 3;</code>
+     */
+    public com.codeahoy.alluvium.protocol.AlluviumProtocol.LoginResponseOrBuilder getLoginResponseOrBuilder() {
+      if (requestCase_ == 3) {
+         return (com.codeahoy.alluvium.protocol.AlluviumProtocol.LoginResponse) request_;
+      }
+      return com.codeahoy.alluvium.protocol.AlluviumProtocol.LoginResponse.getDefaultInstance();
+    }
+
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
@@ -1639,6 +2525,9 @@ public final class AlluviumProtocol {
       if (requestCase_ == 2) {
         output.writeMessage(2, (com.codeahoy.alluvium.protocol.AlluviumProtocol.ServerTimeResponse) request_);
       }
+      if (requestCase_ == 3) {
+        output.writeMessage(3, (com.codeahoy.alluvium.protocol.AlluviumProtocol.LoginResponse) request_);
+      }
     }
 
     public int getSerializedSize() {
@@ -1653,6 +2542,10 @@ public final class AlluviumProtocol {
       if (requestCase_ == 2) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(2, (com.codeahoy.alluvium.protocol.AlluviumProtocol.ServerTimeResponse) request_);
+      }
+      if (requestCase_ == 3) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(3, (com.codeahoy.alluvium.protocol.AlluviumProtocol.LoginResponse) request_);
       }
       memoizedSize = size;
       return size;
@@ -1679,6 +2572,10 @@ public final class AlluviumProtocol {
           result = result && getServerTime()
               .equals(other.getServerTime());
           break;
+        case 3:
+          result = result && getLoginResponse()
+              .equals(other.getLoginResponse());
+          break;
         case 0:
         default:
       }
@@ -1698,6 +2595,10 @@ public final class AlluviumProtocol {
         case 2:
           hash = (37 * hash) + SERVER_TIME_FIELD_NUMBER;
           hash = (53 * hash) + getServerTime().hashCode();
+          break;
+        case 3:
+          hash = (37 * hash) + LOGIN_RESPONSE_FIELD_NUMBER;
+          hash = (53 * hash) + getLoginResponse().hashCode();
           break;
         case 0:
         default:
@@ -1854,6 +2755,13 @@ public final class AlluviumProtocol {
             result.request_ = serverTimeBuilder_.build();
           }
         }
+        if (requestCase_ == 3) {
+          if (loginResponseBuilder_ == null) {
+            result.request_ = request_;
+          } else {
+            result.request_ = loginResponseBuilder_.build();
+          }
+        }
         result.requestCase_ = requestCase_;
         onBuilt();
         return result;
@@ -1902,6 +2810,10 @@ public final class AlluviumProtocol {
         switch (other.getRequestCase()) {
           case SERVER_TIME: {
             mergeServerTime(other.getServerTime());
+            break;
+          }
+          case LOGIN_RESPONSE: {
+            mergeLoginResponse(other.getLoginResponse());
             break;
           }
           case REQUEST_NOT_SET: {
@@ -2121,6 +3033,136 @@ public final class AlluviumProtocol {
         requestCase_ = 2;
         onChanged();;
         return serverTimeBuilder_;
+      }
+
+      private com.google.protobuf.SingleFieldBuilderV3<
+          com.codeahoy.alluvium.protocol.AlluviumProtocol.LoginResponse, com.codeahoy.alluvium.protocol.AlluviumProtocol.LoginResponse.Builder, com.codeahoy.alluvium.protocol.AlluviumProtocol.LoginResponseOrBuilder> loginResponseBuilder_;
+      /**
+       * <code>.com.codeahoy.alluvium.message.LoginResponse login_response = 3;</code>
+       */
+      public com.codeahoy.alluvium.protocol.AlluviumProtocol.LoginResponse getLoginResponse() {
+        if (loginResponseBuilder_ == null) {
+          if (requestCase_ == 3) {
+            return (com.codeahoy.alluvium.protocol.AlluviumProtocol.LoginResponse) request_;
+          }
+          return com.codeahoy.alluvium.protocol.AlluviumProtocol.LoginResponse.getDefaultInstance();
+        } else {
+          if (requestCase_ == 3) {
+            return loginResponseBuilder_.getMessage();
+          }
+          return com.codeahoy.alluvium.protocol.AlluviumProtocol.LoginResponse.getDefaultInstance();
+        }
+      }
+      /**
+       * <code>.com.codeahoy.alluvium.message.LoginResponse login_response = 3;</code>
+       */
+      public Builder setLoginResponse(com.codeahoy.alluvium.protocol.AlluviumProtocol.LoginResponse value) {
+        if (loginResponseBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          request_ = value;
+          onChanged();
+        } else {
+          loginResponseBuilder_.setMessage(value);
+        }
+        requestCase_ = 3;
+        return this;
+      }
+      /**
+       * <code>.com.codeahoy.alluvium.message.LoginResponse login_response = 3;</code>
+       */
+      public Builder setLoginResponse(
+          com.codeahoy.alluvium.protocol.AlluviumProtocol.LoginResponse.Builder builderForValue) {
+        if (loginResponseBuilder_ == null) {
+          request_ = builderForValue.build();
+          onChanged();
+        } else {
+          loginResponseBuilder_.setMessage(builderForValue.build());
+        }
+        requestCase_ = 3;
+        return this;
+      }
+      /**
+       * <code>.com.codeahoy.alluvium.message.LoginResponse login_response = 3;</code>
+       */
+      public Builder mergeLoginResponse(com.codeahoy.alluvium.protocol.AlluviumProtocol.LoginResponse value) {
+        if (loginResponseBuilder_ == null) {
+          if (requestCase_ == 3 &&
+              request_ != com.codeahoy.alluvium.protocol.AlluviumProtocol.LoginResponse.getDefaultInstance()) {
+            request_ = com.codeahoy.alluvium.protocol.AlluviumProtocol.LoginResponse.newBuilder((com.codeahoy.alluvium.protocol.AlluviumProtocol.LoginResponse) request_)
+                .mergeFrom(value).buildPartial();
+          } else {
+            request_ = value;
+          }
+          onChanged();
+        } else {
+          if (requestCase_ == 3) {
+            loginResponseBuilder_.mergeFrom(value);
+          }
+          loginResponseBuilder_.setMessage(value);
+        }
+        requestCase_ = 3;
+        return this;
+      }
+      /**
+       * <code>.com.codeahoy.alluvium.message.LoginResponse login_response = 3;</code>
+       */
+      public Builder clearLoginResponse() {
+        if (loginResponseBuilder_ == null) {
+          if (requestCase_ == 3) {
+            requestCase_ = 0;
+            request_ = null;
+            onChanged();
+          }
+        } else {
+          if (requestCase_ == 3) {
+            requestCase_ = 0;
+            request_ = null;
+          }
+          loginResponseBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>.com.codeahoy.alluvium.message.LoginResponse login_response = 3;</code>
+       */
+      public com.codeahoy.alluvium.protocol.AlluviumProtocol.LoginResponse.Builder getLoginResponseBuilder() {
+        return getLoginResponseFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>.com.codeahoy.alluvium.message.LoginResponse login_response = 3;</code>
+       */
+      public com.codeahoy.alluvium.protocol.AlluviumProtocol.LoginResponseOrBuilder getLoginResponseOrBuilder() {
+        if ((requestCase_ == 3) && (loginResponseBuilder_ != null)) {
+          return loginResponseBuilder_.getMessageOrBuilder();
+        } else {
+          if (requestCase_ == 3) {
+            return (com.codeahoy.alluvium.protocol.AlluviumProtocol.LoginResponse) request_;
+          }
+          return com.codeahoy.alluvium.protocol.AlluviumProtocol.LoginResponse.getDefaultInstance();
+        }
+      }
+      /**
+       * <code>.com.codeahoy.alluvium.message.LoginResponse login_response = 3;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          com.codeahoy.alluvium.protocol.AlluviumProtocol.LoginResponse, com.codeahoy.alluvium.protocol.AlluviumProtocol.LoginResponse.Builder, com.codeahoy.alluvium.protocol.AlluviumProtocol.LoginResponseOrBuilder> 
+          getLoginResponseFieldBuilder() {
+        if (loginResponseBuilder_ == null) {
+          if (!(requestCase_ == 3)) {
+            request_ = com.codeahoy.alluvium.protocol.AlluviumProtocol.LoginResponse.getDefaultInstance();
+          }
+          loginResponseBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              com.codeahoy.alluvium.protocol.AlluviumProtocol.LoginResponse, com.codeahoy.alluvium.protocol.AlluviumProtocol.LoginResponse.Builder, com.codeahoy.alluvium.protocol.AlluviumProtocol.LoginResponseOrBuilder>(
+                  (com.codeahoy.alluvium.protocol.AlluviumProtocol.LoginResponse) request_,
+                  getParentForChildren(),
+                  isClean());
+          request_ = null;
+        }
+        requestCase_ = 3;
+        onChanged();;
+        return loginResponseBuilder_;
       }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
@@ -2811,6 +3853,709 @@ public final class AlluviumProtocol {
 
   }
 
+  public interface LoginResponseOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.codeahoy.alluvium.message.LoginResponse)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>string request_id = 1;</code>
+     */
+    java.lang.String getRequestId();
+    /**
+     * <code>string request_id = 1;</code>
+     */
+    com.google.protobuf.ByteString
+        getRequestIdBytes();
+
+    /**
+     * <code>uint32 code = 2;</code>
+     */
+    int getCode();
+
+    /**
+     * <code>string message = 3;</code>
+     */
+    java.lang.String getMessage();
+    /**
+     * <code>string message = 3;</code>
+     */
+    com.google.protobuf.ByteString
+        getMessageBytes();
+  }
+  /**
+   * Protobuf type {@code com.codeahoy.alluvium.message.LoginResponse}
+   */
+  public  static final class LoginResponse extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:com.codeahoy.alluvium.message.LoginResponse)
+      LoginResponseOrBuilder {
+    // Use LoginResponse.newBuilder() to construct.
+    private LoginResponse(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private LoginResponse() {
+      requestId_ = "";
+      code_ = 0;
+      message_ = "";
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+    }
+    private LoginResponse(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      int mutable_bitField0_ = 0;
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!input.skipField(tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              requestId_ = s;
+              break;
+            }
+            case 16: {
+
+              code_ = input.readUInt32();
+              break;
+            }
+            case 26: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              message_ = s;
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.codeahoy.alluvium.protocol.AlluviumProtocol.internal_static_com_codeahoy_alluvium_message_LoginResponse_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.codeahoy.alluvium.protocol.AlluviumProtocol.internal_static_com_codeahoy_alluvium_message_LoginResponse_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.codeahoy.alluvium.protocol.AlluviumProtocol.LoginResponse.class, com.codeahoy.alluvium.protocol.AlluviumProtocol.LoginResponse.Builder.class);
+    }
+
+    public static final int REQUEST_ID_FIELD_NUMBER = 1;
+    private volatile java.lang.Object requestId_;
+    /**
+     * <code>string request_id = 1;</code>
+     */
+    public java.lang.String getRequestId() {
+      java.lang.Object ref = requestId_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        requestId_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string request_id = 1;</code>
+     */
+    public com.google.protobuf.ByteString
+        getRequestIdBytes() {
+      java.lang.Object ref = requestId_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        requestId_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int CODE_FIELD_NUMBER = 2;
+    private int code_;
+    /**
+     * <code>uint32 code = 2;</code>
+     */
+    public int getCode() {
+      return code_;
+    }
+
+    public static final int MESSAGE_FIELD_NUMBER = 3;
+    private volatile java.lang.Object message_;
+    /**
+     * <code>string message = 3;</code>
+     */
+    public java.lang.String getMessage() {
+      java.lang.Object ref = message_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        message_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string message = 3;</code>
+     */
+    public com.google.protobuf.ByteString
+        getMessageBytes() {
+      java.lang.Object ref = message_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        message_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (!getRequestIdBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, requestId_);
+      }
+      if (code_ != 0) {
+        output.writeUInt32(2, code_);
+      }
+      if (!getMessageBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 3, message_);
+      }
+    }
+
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (!getRequestIdBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, requestId_);
+      }
+      if (code_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt32Size(2, code_);
+      }
+      if (!getMessageBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, message_);
+      }
+      memoizedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof com.codeahoy.alluvium.protocol.AlluviumProtocol.LoginResponse)) {
+        return super.equals(obj);
+      }
+      com.codeahoy.alluvium.protocol.AlluviumProtocol.LoginResponse other = (com.codeahoy.alluvium.protocol.AlluviumProtocol.LoginResponse) obj;
+
+      boolean result = true;
+      result = result && getRequestId()
+          .equals(other.getRequestId());
+      result = result && (getCode()
+          == other.getCode());
+      result = result && getMessage()
+          .equals(other.getMessage());
+      return result;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (37 * hash) + REQUEST_ID_FIELD_NUMBER;
+      hash = (53 * hash) + getRequestId().hashCode();
+      hash = (37 * hash) + CODE_FIELD_NUMBER;
+      hash = (53 * hash) + getCode();
+      hash = (37 * hash) + MESSAGE_FIELD_NUMBER;
+      hash = (53 * hash) + getMessage().hashCode();
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static com.codeahoy.alluvium.protocol.AlluviumProtocol.LoginResponse parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.codeahoy.alluvium.protocol.AlluviumProtocol.LoginResponse parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.codeahoy.alluvium.protocol.AlluviumProtocol.LoginResponse parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.codeahoy.alluvium.protocol.AlluviumProtocol.LoginResponse parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.codeahoy.alluvium.protocol.AlluviumProtocol.LoginResponse parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.codeahoy.alluvium.protocol.AlluviumProtocol.LoginResponse parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.codeahoy.alluvium.protocol.AlluviumProtocol.LoginResponse parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static com.codeahoy.alluvium.protocol.AlluviumProtocol.LoginResponse parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.codeahoy.alluvium.protocol.AlluviumProtocol.LoginResponse parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.codeahoy.alluvium.protocol.AlluviumProtocol.LoginResponse parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(com.codeahoy.alluvium.protocol.AlluviumProtocol.LoginResponse prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code com.codeahoy.alluvium.message.LoginResponse}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.codeahoy.alluvium.message.LoginResponse)
+        com.codeahoy.alluvium.protocol.AlluviumProtocol.LoginResponseOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.codeahoy.alluvium.protocol.AlluviumProtocol.internal_static_com_codeahoy_alluvium_message_LoginResponse_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.codeahoy.alluvium.protocol.AlluviumProtocol.internal_static_com_codeahoy_alluvium_message_LoginResponse_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.codeahoy.alluvium.protocol.AlluviumProtocol.LoginResponse.class, com.codeahoy.alluvium.protocol.AlluviumProtocol.LoginResponse.Builder.class);
+      }
+
+      // Construct using com.codeahoy.alluvium.protocol.AlluviumProtocol.LoginResponse.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      public Builder clear() {
+        super.clear();
+        requestId_ = "";
+
+        code_ = 0;
+
+        message_ = "";
+
+        return this;
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.codeahoy.alluvium.protocol.AlluviumProtocol.internal_static_com_codeahoy_alluvium_message_LoginResponse_descriptor;
+      }
+
+      public com.codeahoy.alluvium.protocol.AlluviumProtocol.LoginResponse getDefaultInstanceForType() {
+        return com.codeahoy.alluvium.protocol.AlluviumProtocol.LoginResponse.getDefaultInstance();
+      }
+
+      public com.codeahoy.alluvium.protocol.AlluviumProtocol.LoginResponse build() {
+        com.codeahoy.alluvium.protocol.AlluviumProtocol.LoginResponse result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.codeahoy.alluvium.protocol.AlluviumProtocol.LoginResponse buildPartial() {
+        com.codeahoy.alluvium.protocol.AlluviumProtocol.LoginResponse result = new com.codeahoy.alluvium.protocol.AlluviumProtocol.LoginResponse(this);
+        result.requestId_ = requestId_;
+        result.code_ = code_;
+        result.message_ = message_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder clone() {
+        return (Builder) super.clone();
+      }
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return (Builder) super.setField(field, value);
+      }
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return (Builder) super.clearField(field);
+      }
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return (Builder) super.clearOneof(oneof);
+      }
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, Object value) {
+        return (Builder) super.setRepeatedField(field, index, value);
+      }
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return (Builder) super.addRepeatedField(field, value);
+      }
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.codeahoy.alluvium.protocol.AlluviumProtocol.LoginResponse) {
+          return mergeFrom((com.codeahoy.alluvium.protocol.AlluviumProtocol.LoginResponse)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.codeahoy.alluvium.protocol.AlluviumProtocol.LoginResponse other) {
+        if (other == com.codeahoy.alluvium.protocol.AlluviumProtocol.LoginResponse.getDefaultInstance()) return this;
+        if (!other.getRequestId().isEmpty()) {
+          requestId_ = other.requestId_;
+          onChanged();
+        }
+        if (other.getCode() != 0) {
+          setCode(other.getCode());
+        }
+        if (!other.getMessage().isEmpty()) {
+          message_ = other.message_;
+          onChanged();
+        }
+        onChanged();
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.codeahoy.alluvium.protocol.AlluviumProtocol.LoginResponse parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.codeahoy.alluvium.protocol.AlluviumProtocol.LoginResponse) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+
+      private java.lang.Object requestId_ = "";
+      /**
+       * <code>string request_id = 1;</code>
+       */
+      public java.lang.String getRequestId() {
+        java.lang.Object ref = requestId_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          requestId_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string request_id = 1;</code>
+       */
+      public com.google.protobuf.ByteString
+          getRequestIdBytes() {
+        java.lang.Object ref = requestId_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          requestId_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string request_id = 1;</code>
+       */
+      public Builder setRequestId(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        requestId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string request_id = 1;</code>
+       */
+      public Builder clearRequestId() {
+        
+        requestId_ = getDefaultInstance().getRequestId();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string request_id = 1;</code>
+       */
+      public Builder setRequestIdBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        requestId_ = value;
+        onChanged();
+        return this;
+      }
+
+      private int code_ ;
+      /**
+       * <code>uint32 code = 2;</code>
+       */
+      public int getCode() {
+        return code_;
+      }
+      /**
+       * <code>uint32 code = 2;</code>
+       */
+      public Builder setCode(int value) {
+        
+        code_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>uint32 code = 2;</code>
+       */
+      public Builder clearCode() {
+        
+        code_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object message_ = "";
+      /**
+       * <code>string message = 3;</code>
+       */
+      public java.lang.String getMessage() {
+        java.lang.Object ref = message_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          message_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string message = 3;</code>
+       */
+      public com.google.protobuf.ByteString
+          getMessageBytes() {
+        java.lang.Object ref = message_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          message_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string message = 3;</code>
+       */
+      public Builder setMessage(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        message_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string message = 3;</code>
+       */
+      public Builder clearMessage() {
+        
+        message_ = getDefaultInstance().getMessage();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string message = 3;</code>
+       */
+      public Builder setMessageBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        message_ = value;
+        onChanged();
+        return this;
+      }
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return this;
+      }
+
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return this;
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:com.codeahoy.alluvium.message.LoginResponse)
+    }
+
+    // @@protoc_insertion_point(class_scope:com.codeahoy.alluvium.message.LoginResponse)
+    private static final com.codeahoy.alluvium.protocol.AlluviumProtocol.LoginResponse DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new com.codeahoy.alluvium.protocol.AlluviumProtocol.LoginResponse();
+    }
+
+    public static com.codeahoy.alluvium.protocol.AlluviumProtocol.LoginResponse getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<LoginResponse>
+        PARSER = new com.google.protobuf.AbstractParser<LoginResponse>() {
+      public LoginResponse parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+          return new LoginResponse(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<LoginResponse> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<LoginResponse> getParserForType() {
+      return PARSER;
+    }
+
+    public com.codeahoy.alluvium.protocol.AlluviumProtocol.LoginResponse getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
   private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_codeahoy_alluvium_message_Request_descriptor;
   private static final 
@@ -2822,6 +4567,11 @@ public final class AlluviumProtocol {
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_com_codeahoy_alluvium_message_ServerTimeRequest_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_com_codeahoy_alluvium_message_LoginRequest_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_com_codeahoy_alluvium_message_LoginRequest_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_codeahoy_alluvium_message_Response_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
@@ -2831,6 +4581,11 @@ public final class AlluviumProtocol {
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_com_codeahoy_alluvium_message_ServerTimeResponse_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_com_codeahoy_alluvium_message_LoginResponse_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_com_codeahoy_alluvium_message_LoginResponse_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -2841,20 +4596,27 @@ public final class AlluviumProtocol {
   static {
     java.lang.String[] descriptorData = {
       "\n\016messages.proto\022\035com.codeahoy.alluvium." +
-      "message\"\273\001\n\007Request\0229\n\004type\030\001 \001(\0162+.com." +
+      "message\"\201\002\n\007Request\0229\n\004type\030\001 \001(\0162+.com." +
       "codeahoy.alluvium.message.Request.Type\022G" +
       "\n\013server_time\030\002 \001(\01320.com.codeahoy.alluv" +
-      "ium.message.ServerTimeRequestH\000\"!\n\004Type\022" +
-      "\016\n\nSERVERTIME\020\000\022\t\n\005LOGIN\020\001B\t\n\007request\"\'\n" +
-      "\021ServerTimeRequest\022\022\n\nrequest_id\030\001 \001(\t\"\276" +
-      "\001\n\010Response\022:\n\004type\030\001 \001(\0162,.com.codeahoy" +
-      ".alluvium.message.Response.Type\022H\n\013serve" +
-      "r_time\030\002 \001(\01321.com.codeahoy.alluvium.mes",
-      "sage.ServerTimeResponseH\000\"!\n\004Type\022\016\n\nSER" +
-      "VERTIME\020\000\022\t\n\005LOGIN\020\001B\t\n\007request\"=\n\022Serve" +
-      "rTimeResponse\022\022\n\nrequest_id\030\001 \001(\t\022\023\n\013ser" +
-      "ver_time\030\002 \001(\tB2\n\036com.codeahoy.alluvium." +
-      "protocolB\020AlluviumProtocolb\006proto3"
+      "ium.message.ServerTimeRequestH\000\022D\n\rlogin" +
+      "_request\030\003 \001(\0132+.com.codeahoy.alluvium.m" +
+      "essage.LoginRequestH\000\"!\n\004Type\022\016\n\nSERVERT" +
+      "IME\020\000\022\t\n\005LOGIN\020\001B\t\n\007request\"\'\n\021ServerTim" +
+      "eRequest\022\022\n\nrequest_id\030\001 \001(\t\".\n\014LoginReq" +
+      "uest\022\022\n\nrequest_id\030\001 \001(\t\022\n\n\002id\030\002 \001(\t\"\206\002\n",
+      "\010Response\022:\n\004type\030\001 \001(\0162,.com.codeahoy.a" +
+      "lluvium.message.Response.Type\022H\n\013server_" +
+      "time\030\002 \001(\01321.com.codeahoy.alluvium.messa" +
+      "ge.ServerTimeResponseH\000\022F\n\016login_respons" +
+      "e\030\003 \001(\0132,.com.codeahoy.alluvium.message." +
+      "LoginResponseH\000\"!\n\004Type\022\016\n\nSERVERTIME\020\000\022" +
+      "\t\n\005LOGIN\020\001B\t\n\007request\"=\n\022ServerTimeRespo" +
+      "nse\022\022\n\nrequest_id\030\001 \001(\t\022\023\n\013server_time\030\002" +
+      " \001(\t\"B\n\rLoginResponse\022\022\n\nrequest_id\030\001 \001(" +
+      "\t\022\014\n\004code\030\002 \001(\r\022\017\n\007message\030\003 \001(\tB2\n\036com.",
+      "codeahoy.alluvium.protocolB\020AlluviumProt" +
+      "ocolb\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -2873,25 +4635,37 @@ public final class AlluviumProtocol {
     internal_static_com_codeahoy_alluvium_message_Request_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_com_codeahoy_alluvium_message_Request_descriptor,
-        new java.lang.String[] { "Type", "ServerTime", "Request", });
+        new java.lang.String[] { "Type", "ServerTime", "LoginRequest", "Request", });
     internal_static_com_codeahoy_alluvium_message_ServerTimeRequest_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_com_codeahoy_alluvium_message_ServerTimeRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_com_codeahoy_alluvium_message_ServerTimeRequest_descriptor,
         new java.lang.String[] { "RequestId", });
-    internal_static_com_codeahoy_alluvium_message_Response_descriptor =
+    internal_static_com_codeahoy_alluvium_message_LoginRequest_descriptor =
       getDescriptor().getMessageTypes().get(2);
+    internal_static_com_codeahoy_alluvium_message_LoginRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_com_codeahoy_alluvium_message_LoginRequest_descriptor,
+        new java.lang.String[] { "RequestId", "Id", });
+    internal_static_com_codeahoy_alluvium_message_Response_descriptor =
+      getDescriptor().getMessageTypes().get(3);
     internal_static_com_codeahoy_alluvium_message_Response_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_com_codeahoy_alluvium_message_Response_descriptor,
-        new java.lang.String[] { "Type", "ServerTime", "Request", });
+        new java.lang.String[] { "Type", "ServerTime", "LoginResponse", "Request", });
     internal_static_com_codeahoy_alluvium_message_ServerTimeResponse_descriptor =
-      getDescriptor().getMessageTypes().get(3);
+      getDescriptor().getMessageTypes().get(4);
     internal_static_com_codeahoy_alluvium_message_ServerTimeResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_com_codeahoy_alluvium_message_ServerTimeResponse_descriptor,
         new java.lang.String[] { "RequestId", "ServerTime", });
+    internal_static_com_codeahoy_alluvium_message_LoginResponse_descriptor =
+      getDescriptor().getMessageTypes().get(5);
+    internal_static_com_codeahoy_alluvium_message_LoginResponse_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_com_codeahoy_alluvium_message_LoginResponse_descriptor,
+        new java.lang.String[] { "RequestId", "Code", "Message", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

@@ -24,11 +24,17 @@ message Request {
 
     oneof request {
         ServerTimeRequest server_time = 2;
+        LoginRequest login_request = 3;
     }
 }
 
 message ServerTimeRequest {
     string request_id = 1;
+}
+
+message LoginRequest {
+    string request_id = 1;
+    string id = 2;
 }
 
 
@@ -47,11 +53,17 @@ message Response {
 
     oneof request {
         ServerTimeResponse server_time = 2;
+        LoginResponse login_response = 3;
     }
 }
-
 
 message ServerTimeResponse {
     string request_id = 1;
     string server_time = 2;
+}
+
+message LoginResponse {
+    string request_id = 1;
+    uint32 code = 2;
+    string message = 3;
 }

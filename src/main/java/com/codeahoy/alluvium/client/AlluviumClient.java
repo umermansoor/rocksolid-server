@@ -21,7 +21,7 @@ import org.slf4j.LoggerFactory;
 import java.util.UUID;
 
 /**
- * Alluvium client. For demonstration.
+ * Alluvium user. For demonstration.
  *
  * @author umer
  */
@@ -50,7 +50,7 @@ public class AlluviumClient {
                 }
             });
 
-            // Start the client.
+            // Start the user.
             ChannelFuture f = b.connect(host, port).sync();
             logger.debug("connecting to the server {} on port {}.", host, port);
 
