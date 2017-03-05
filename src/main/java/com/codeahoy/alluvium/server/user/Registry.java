@@ -11,11 +11,26 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 @Component
 public class Registry {
-    Map<ChannelId, User> channelIdUserMap = new ConcurrentHashMap<>();
-    Map<String, User> idUserMap = new ConcurrentHashMap<>();
+    /**
+     * A map for keeping {@link ChannelId} to {@link User} mapping.
+     */
+    private final Map<ChannelId, User> channelIdUserMap = new ConcurrentHashMap<>();
+
+    /**
+     * A map for keeping {@link ChannelId} to {@link User} mapping.
+     */
+    private final Map<String, User> idUserMap = new ConcurrentHashMap<>();
 
     public Optional<User> getUserByChannelId(ChannelId channelId) {
          return Optional.ofNullable(channelIdUserMap.get(channelId));
+    }
+
+    public int totalUsers() {
+        return channelIdUserMap.size();
+    }
+
+    public int totalIdentifiedUsers() {
+        return idUserMap.size();
     }
 
     public Optional<User> getUserById(String id) {
@@ -26,17 +41,17 @@ public class Registry {
         channelIdUserMap.put(channelId, user);
     }
 
+    /**
+     * This removes users from both
+     * @param channelId
+     */
     public synchronized void removeByChannelId(ChannelId channelId) {
         User user = getUserByChannelId(channelId).orElseThrow(IllegalStateException::new);
-        if (user.getId() != null) {
-            idUserMap.remove(user.getId());
+        if (user.id() != null) {
+            idUserMap.remove(user.id());
         }
 
         channelIdUserMap.remove(channelId);
-
-
-
-
     }
 
 }

@@ -17,6 +17,8 @@ import java.time.Instant;
 import java.util.concurrent.ExecutorService;
 
 /**
+ *
+ * TODO: Document and rename
  * @author umer
  */
 @Component
@@ -75,11 +77,13 @@ public class ServerHandler extends SimpleChannelInboundHandler<AlluviumProtocol.
     }
 
     private void clientConnected(Channel channel) {
+        assert channel != null;
         User user = new User(channel);
         registry.addUser(channel.id(), user);
     }
 
     private void clientDisconnected(Channel channel) {
+        assert channel != null;
         registry.removeByChannelId(channel.id());
     }
 
@@ -99,7 +103,7 @@ public class ServerHandler extends SimpleChannelInboundHandler<AlluviumProtocol.
             user.assignId(loginRequest.getId());
 
             AlluviumProtocol.LoginResponse loginResponse= AlluviumProtocol.LoginResponse.newBuilder()
-                    .setRequestId(loginRequest.getId())
+                    .setRequestId(loginRequest.getRequestId())
                     .setCode(200)
                     .setMessage("success")
                     .build();
@@ -109,11 +113,7 @@ public class ServerHandler extends SimpleChannelInboundHandler<AlluviumProtocol.
                     .setLoginResponse(loginResponse)
                     .build();
 
-
-
-
-
-
+            user.send(response);
         }
 
         private void processServerTimeRequest(User user, AlluviumProtocol.ServerTimeRequest serverTimeRequest) {

@@ -17,7 +17,10 @@ public class ClientHandler extends SimpleChannelInboundHandler<AlluviumProtocol.
     public void channelRead0(ChannelHandlerContext ctx, AlluviumProtocol.Response response) throws Exception {
         if (response.getType().equals(AlluviumProtocol.Response.Type.SERVERTIME)) {
             AlluviumProtocol.ServerTimeResponse serverTimeResponse = response.getServerTime();
-            logger.debug("new message {} {}", serverTimeResponse.getRequestId(), serverTimeResponse.getServerTime());
+            logger.debug("{} - id: [{}] time: [{}]", serverTimeResponse.getClass().getSimpleName(), serverTimeResponse.getRequestId(), serverTimeResponse.getServerTime());
+        } else if (response.getType().equals(AlluviumProtocol.Response.Type.LOGIN)) {
+            AlluviumProtocol.LoginResponse loginResponse = response.getLoginResponse();
+            logger.debug("{} - id: [{}] code: [{}]", loginResponse.getClass().getSimpleName(), loginResponse.getRequestId(), loginResponse.getCode());
         }
     }
 

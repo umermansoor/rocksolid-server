@@ -21,7 +21,7 @@ import org.slf4j.LoggerFactory;
 import java.util.UUID;
 
 /**
- * Alluvium user. For demonstration.
+ * Alluvium user. For demonstration only.
  *
  * @author umer
  */
@@ -55,23 +55,46 @@ public class AlluviumClient {
             logger.debug("connecting to the server {} on port {}.", host, port);
 
             // Request current time
-            AlluviumProtocol.ServerTimeRequest serverTimeRequest =
-                    AlluviumProtocol.ServerTimeRequest.newBuilder()
-                            .setRequestId(UUID.randomUUID().toString())
-                            .build();
+            f.channel().writeAndFlush(serverTimeRequest());
 
-            AlluviumProtocol.Request request = AlluviumProtocol.Request.newBuilder()
-                    .setServerTime(serverTimeRequest)
-                    .setType(AlluviumProtocol.Request.Type.SERVERTIME)
-                    .build();
+            // Login
+            f.channel().writeAndFlush(loginRequest());
 
-            f.channel().writeAndFlush(request);
 
             // Wait for the connection to be closed.
             f.channel().closeFuture().sync();
         } finally {
             workerGroup.shutdownGracefully();
         }
+
+    }
+
+    private static AlluviumProtocol.Request serverTimeRequest() {
+        AlluviumProtocol.ServerTimeRequest serverTimeRequest =
+                AlluviumProtocol.ServerTimeRequest.newBuilder()
+                        .setRequestId(UUID.randomUUID().toString())
+                        .build();
+
+        AlluviumProtocol.Request request = AlluviumProtocol.Request.newBuilder()
+                .setServerTime(serverTimeRequest)
+                .setType(AlluviumProtocol.Request.Type.SERVERTIME)
+                .build();
+
+        return request;
+    }
+
+    private static AlluviumProtocol.Request loginRequest() {
+        AlluviumProtocol.LoginRequest loginRequest =
+                AlluviumProtocol.LoginRequest.newBuilder()
+                        .setRequestId(UUID.randomUUID().toString())
+                        .build();
+
+        AlluviumProtocol.Request request = AlluviumProtocol.Request.newBuilder()
+                .setLoginRequest(loginRequest)
+                .setType(AlluviumProtocol.Request.Type.LOGIN)
+                .build();
+
+        return request;
 
     }
 

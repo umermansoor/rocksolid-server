@@ -20,10 +20,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.scheduling.TaskScheduler;
 import org.springframework.scheduling.concurrent.ThreadPoolExecutorFactoryBean;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
+
 import javax.annotation.PreDestroy;
 
 /**
+ *
+ * TODO: Document and rename
  * @author umer
  */
 @Configuration
@@ -87,11 +92,11 @@ public class ServerConfiguration {
         } catch (InterruptedException ie) {
         }
 
-        logger.info("Alluvium listening on port " + serverPort + "");
+        logger.info("Alluvium server listening on port " + serverPort + "");
         return bean;
     }
 
-    @Bean (initMethod = "initialize", destroyMethod = "destroy")
+    @Bean(initMethod = "initialize", destroyMethod = "destroy")
     protected ThreadPoolExecutorFactoryBean threadPoolExecutorFactoryBean() {
         ThreadPoolExecutorFactoryBean threadPoolExecutor = new ThreadPoolExecutorFactoryBean();
         threadPoolExecutor.setCorePoolSize(100);
@@ -99,4 +104,13 @@ public class ServerConfiguration {
         threadPoolExecutor.setQueueCapacity(100);
         return threadPoolExecutor;
     }
+
+    @Bean(destroyMethod = "shutdown")
+    protected TaskScheduler taskScheduler() {
+        ThreadPoolTaskScheduler taskScheduler = new ThreadPoolTaskScheduler();
+        taskScheduler.setPoolSize(5); //TODO: best size?
+        taskScheduler.setThreadGroupName("taskScheduler-");
+        return taskScheduler;
+    }
+
 }

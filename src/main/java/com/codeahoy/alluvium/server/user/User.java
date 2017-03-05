@@ -24,15 +24,21 @@ public class User {
 
     private static final Logger logger = LoggerFactory.getLogger(User.class);
 
-    public synchronized void assignId(String s) {
-        this.id = s;
+    /**
+     *
+     * @param channel
+     * @throws NullPointerException if channel is null.
+     */
+    public User(Channel channel) {
+        if (channel == null) {
+            throw new NullPointerException("channel cannot be null.");
+        }
+
+        this.channel = channel;
+        connectionStartTimeMillis = System.currentTimeMillis();
     }
 
-    public synchronized String getId() {
-        return id;
-    }
-
-    public boolean isConnected() {
+    public boolean isOnline() {
         return channel.isActive();
     }
 
@@ -55,11 +61,6 @@ public class User {
         return result;
     }
 
-    public User(Channel channel) {
-        this.channel = channel;
-        connectionStartTimeMillis = System.currentTimeMillis();
-    }
-
     public void send(Object response) {
         channel.writeAndFlush(response);
     }
@@ -72,4 +73,13 @@ public class User {
                 ", id='" + id + '\'' +
                 '}';
     }
+
+    public synchronized void assignId(String s) {
+        this.id = s;
+    }
+
+    public synchronized String id() {
+        return id;
+    }
+
 }
