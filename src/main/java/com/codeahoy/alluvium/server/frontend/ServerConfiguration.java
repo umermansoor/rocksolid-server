@@ -35,8 +35,7 @@ import java.util.concurrent.ScheduledExecutorService;
  * @author umer
  */
 @Configuration
-public class ServerConfiguration {
-
+class ServerConfiguration {
     @Value("${server.port:6677}")
     private int serverPort;
 

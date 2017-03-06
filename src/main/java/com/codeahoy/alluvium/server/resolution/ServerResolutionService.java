@@ -1,7 +1,7 @@
 package com.codeahoy.alluvium.server.resolution;
 
 import com.codeahoy.alluvium.server.common.ServerId;
-import com.codeahoy.alluvium.server.user.UserId;
+import com.codeahoy.alluvium.server.common.UserId;
 
 /**
  * ServerResolutionService is useful when running a cluster or a group of Alluvium servers and users can connect with any

@@ -23,7 +23,7 @@ import java.util.concurrent.ExecutorService;
  */
 @Component
 @ChannelHandler.Sharable
-public class ServerHandler extends SimpleChannelInboundHandler<AlluviumProtocol.Request> {
+class ServerHandler extends SimpleChannelInboundHandler<AlluviumProtocol.Request> {
     @Autowired
     private ThreadPoolExecutorFactoryBean threadPoolExecutorFactoryBean;
 

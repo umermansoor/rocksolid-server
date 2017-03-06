@@ -15,10 +15,33 @@ import java.util.UUID;
  */
 @Component
 public class ServerId {
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        ServerId serverId1 = (ServerId) o;
+
+        return serverId.equals(serverId1.serverId);
+
+    }
+
+    @Override
+    public int hashCode() {
+        return serverId.hashCode();
+    }
+
     /**
      * Server Id is a randomly generated unique identifier.
      */
     private final String serverId = UUID.randomUUID().toString();
+
+    @Override
+    public String toString() {
+        return "ServerId{" +
+                "serverId='" + serverId + '\'' +
+                '}';
+    }
 
     public String id() {
         return serverId;

@@ -1,4 +1,4 @@
-package com.codeahoy.alluvium.client;
+package com.codeahoy.alluvium.tcpclient;
 
 import com.codeahoy.alluvium.protocol.AlluviumProtocol;
 import io.netty.bootstrap.Bootstrap;
