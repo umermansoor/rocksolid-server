@@ -87,6 +87,7 @@ public class AlluviumClient {
         AlluviumProtocol.LoginRequest loginRequest =
                 AlluviumProtocol.LoginRequest.newBuilder()
                         .setRequestId(UUID.randomUUID().toString())
+                        .setId("1")
                         .build();
 
         AlluviumProtocol.Request request = AlluviumProtocol.Request.newBuilder()

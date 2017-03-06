@@ -17,6 +17,7 @@ import io.netty.handler.logging.LoggingHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -25,6 +26,8 @@ import org.springframework.scheduling.concurrent.ThreadPoolExecutorFactoryBean;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 
 import javax.annotation.PreDestroy;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
 
 /**
  *
@@ -59,7 +62,7 @@ public class ServerConfiguration {
         }
     }
 
-    public ChannelInitializer<SocketChannel> channelInitializer() {
+    private ChannelInitializer<SocketChannel> channelInitializer() {
         ChannelInitializer<SocketChannel> bean = new ChannelInitializer<SocketChannel>() {
             @Override
             protected void initChannel(SocketChannel ch) throws Exception {
@@ -106,11 +109,13 @@ public class ServerConfiguration {
     }
 
     @Bean(destroyMethod = "shutdown")
-    protected TaskScheduler taskScheduler() {
+    protected ThreadPoolTaskScheduler taskScheduler() {
         ThreadPoolTaskScheduler taskScheduler = new ThreadPoolTaskScheduler();
-        taskScheduler.setPoolSize(5); //TODO: best size?
-        taskScheduler.setThreadGroupName("taskScheduler-");
+        taskScheduler.setPoolSize(1);//TODO: size?
+        taskScheduler.setThreadGroupName("taskScheduler");
         return taskScheduler;
     }
+
+
 
 }

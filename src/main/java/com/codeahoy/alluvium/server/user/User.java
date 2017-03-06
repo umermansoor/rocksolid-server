@@ -20,7 +20,7 @@ public class User {
      * E.g. this could be the username.
      * Protected by @this
      */
-    private String id;
+    private UserId userId;
 
     private static final Logger logger = LoggerFactory.getLogger(User.class);
 
@@ -70,16 +70,16 @@ public class User {
         return "User{" +
                 "channel=" + channel +
                 ", connectionStartTimeMillis=" + connectionStartTimeMillis +
-                ", id='" + id + '\'' +
+                ", id='" + userId + '\'' +
                 '}';
     }
 
-    public synchronized void assignId(String s) {
-        this.id = s;
+    synchronized void assignId(UserId u) {
+        this.userId = u;
     }
 
-    public synchronized String id() {
-        return id;
+    public synchronized UserId id() {
+        return userId;
     }
 
 }

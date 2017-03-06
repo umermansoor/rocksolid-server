@@ -79,7 +79,7 @@ public class ServerHandler extends SimpleChannelInboundHandler<AlluviumProtocol.
     private void clientConnected(Channel channel) {
         assert channel != null;
         User user = new User(channel);
-        registry.addUser(channel.id(), user);
+        registry.registerUserByChannel(channel.id(), user);
     }
 
     private void clientDisconnected(Channel channel) {
@@ -100,13 +100,22 @@ public class ServerHandler extends SimpleChannelInboundHandler<AlluviumProtocol.
         }
 
         private void processLoginRequest(User user, AlluviumProtocol.LoginRequest loginRequest) {
-            user.assignId(loginRequest.getId());
+            boolean success = registry.registerUserByIdentity(loginRequest.getId(), user);
 
-            AlluviumProtocol.LoginResponse loginResponse= AlluviumProtocol.LoginResponse.newBuilder()
-                    .setRequestId(loginRequest.getRequestId())
-                    .setCode(200)
-                    .setMessage("success")
-                    .build();
+            AlluviumProtocol.LoginResponse loginResponse;
+            if (success) {
+                loginResponse = AlluviumProtocol.LoginResponse.newBuilder()
+                        .setRequestId(loginRequest.getRequestId())
+                        .setCode(200)
+                        .setMessage("success")
+                        .build();
+            } else { // user registration failed. send invalid response.
+                loginResponse = AlluviumProtocol.LoginResponse.newBuilder()
+                        .setRequestId(loginRequest.getRequestId())
+                        .setCode(400)
+                        .setMessage("failed")
+                        .build();
+            }
 
             AlluviumProtocol.Response response = AlluviumProtocol.Response.newBuilder()
                     .setType(AlluviumProtocol.Response.Type.LOGIN)
@@ -130,6 +139,5 @@ public class ServerHandler extends SimpleChannelInboundHandler<AlluviumProtocol.
 
             user.send(response);
         }
-
     }
 }
