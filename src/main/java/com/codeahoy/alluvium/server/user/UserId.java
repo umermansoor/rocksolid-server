@@ -7,6 +7,7 @@ package com.codeahoy.alluvium.server.user;
  * pool instead of creating a new object each time.
  *
  * Created by umermansoor on 2017-03-05.
+ *
  */
 public class UserId {
     @Override
