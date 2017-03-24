@@ -1,3 +1,3 @@
-name: alluvium
+name: rocksolid
 server.port: 6677
 spring.main.web-environment: false

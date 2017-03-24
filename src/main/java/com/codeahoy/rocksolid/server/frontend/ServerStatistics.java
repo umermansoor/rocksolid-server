@@ -1,6 +1,6 @@
-package com.codeahoy.alluvium.server.frontend;
+package com.codeahoy.rocksolid.server.frontend;
 
-import com.codeahoy.alluvium.server.user.Registry;
+import com.codeahoy.rocksolid.server.user.Registry;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

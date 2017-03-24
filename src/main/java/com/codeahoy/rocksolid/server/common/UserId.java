@@ -1,4 +1,4 @@
-package com.codeahoy.alluvium.server.common;
+package com.codeahoy.rocksolid.server.common;
 
 /**
  * Class for representing user identity. Encapsulate logic to validate identities.

@@ -1,4 +1,4 @@
-package com.codeahoy.alluvium.server;
+package com.codeahoy.rocksolid.server;
 
 import org.springframework.boot.Banner;
 import org.springframework.boot.SpringApplication;
@@ -16,7 +16,7 @@ public class Application {
      * @param args Command line args, for example, --debug to enable boot strapping logging
      */
     public static void main(String[] args) {
-        SpringApplication application = new SpringApplication(AlluviumConfiguration.class, Application.class);
+        SpringApplication application = new SpringApplication(ApplicationConfiguration.class, Application.class);
         application.setBannerMode(Banner.Mode.CONSOLE);
         application.run(args);
     }

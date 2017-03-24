@@ -1,6 +1,6 @@
-package com.codeahoy.alluvium.server.user;
+package com.codeahoy.rocksolid.server.user;
 
-import com.codeahoy.alluvium.server.common.UserId;
+import com.codeahoy.rocksolid.server.common.UserId;
 import io.netty.channel.ChannelId;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

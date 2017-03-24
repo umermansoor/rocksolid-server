@@ -1,11 +1,11 @@
-package com.codeahoy.alluvium.server.common;
+package com.codeahoy.rocksolid.server.common;
 
 import org.springframework.stereotype.Component;
 
 import java.util.UUID;
 
 /**
- * Each Alluvium server has a unique id so we can uniquely identify a server if we are running a cluser or group of
+ * Each Rocksolid Server has a unique id so we can uniquely identify a server if we are running a cluser or group of
  * Alluvium servers.
  *
  * For example, suppose you wish to send a message to a user. You can check if the user is online using the Presence

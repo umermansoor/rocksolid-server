@@ -1,4 +1,4 @@
-package com.codeahoy.alluvium.server;
+package com.codeahoy.rocksolid.server;
 
 import org.springframework.context.annotation.Configuration;
 
@@ -6,5 +6,5 @@ import org.springframework.context.annotation.Configuration;
  * @author umer
  */
 @Configuration
-public class AlluviumConfiguration {
+public class ApplicationConfiguration {
 }

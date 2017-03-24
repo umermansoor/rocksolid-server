@@ -1,8 +1,8 @@
-package com.codeahoy.alluvium.server.frontend;
+package com.codeahoy.rocksolid.server.frontend;
 
-import com.codeahoy.alluvium.protocol.AlluviumProtocol;
-import com.codeahoy.alluvium.server.user.Registry;
-import com.codeahoy.alluvium.server.user.User;
+import com.codeahoy.rocksolid.protocol.ProtocolBufferMessages;
+import com.codeahoy.rocksolid.server.user.Registry;
+import com.codeahoy.rocksolid.server.user.User;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
@@ -23,7 +23,7 @@ import java.util.concurrent.ExecutorService;
  */
 @Component
 @ChannelHandler.Sharable
-class ServerHandler extends SimpleChannelInboundHandler<AlluviumProtocol.Request> {
+class ServerHandler extends SimpleChannelInboundHandler<ProtocolBufferMessages.Request> {
     @Autowired
     private ThreadPoolExecutorFactoryBean threadPoolExecutorFactoryBean;
 
@@ -42,7 +42,7 @@ class ServerHandler extends SimpleChannelInboundHandler<AlluviumProtocol.Request
     }
 
     @Override
-    public void channelRead0(ChannelHandlerContext ctx, AlluviumProtocol.Request request) throws Exception {
+    public void channelRead0(ChannelHandlerContext ctx, ProtocolBufferMessages.Request request) throws Exception {
         executorService.submit( () -> {
             logger.debug("new message from [{}]", ctx.channel());
 
@@ -90,50 +90,50 @@ class ServerHandler extends SimpleChannelInboundHandler<AlluviumProtocol.Request
 
     private class RequestProcessor {
 
-        public void process(User user, AlluviumProtocol.Request request) {
-            if (request.getType().equals(AlluviumProtocol.Request.Type.SERVERTIME)) {
+        public void process(User user, ProtocolBufferMessages.Request request) {
+            if (request.getType().equals(ProtocolBufferMessages.Request.Type.SERVERTIME)) {
                 processServerTimeRequest(user, request.getServerTime());
-            } else if (request.getType().equals(AlluviumProtocol.Request.Type.LOGIN)) {
+            } else if (request.getType().equals(ProtocolBufferMessages.Request.Type.LOGIN)) {
                 processLoginRequest(user, request.getLoginRequest());
             }
 
         }
 
-        private void processLoginRequest(User user, AlluviumProtocol.LoginRequest loginRequest) {
+        private void processLoginRequest(User user, ProtocolBufferMessages.LoginRequest loginRequest) {
             boolean success = registry.registerUserByIdentity(loginRequest.getId(), user);
 
-            AlluviumProtocol.LoginResponse loginResponse;
+            ProtocolBufferMessages.LoginResponse loginResponse;
             if (success) {
-                loginResponse = AlluviumProtocol.LoginResponse.newBuilder()
-                        .setRequestId(loginRequest.getRequestId())
+                loginResponse = ProtocolBufferMessages.LoginResponse.newBuilder()
+                        .setTransactionId(loginRequest.getTransactionId())
                         .setCode(200)
                         .setMessage("success")
                         .build();
             } else { // user registration failed. send invalid response.
-                loginResponse = AlluviumProtocol.LoginResponse.newBuilder()
-                        .setRequestId(loginRequest.getRequestId())
+                loginResponse = ProtocolBufferMessages.LoginResponse.newBuilder()
+                        .setTransactionId(loginRequest.getTransactionId())
                         .setCode(400)
                         .setMessage("failed")
                         .build();
             }
 
-            AlluviumProtocol.Response response = AlluviumProtocol.Response.newBuilder()
-                    .setType(AlluviumProtocol.Response.Type.LOGIN)
+            ProtocolBufferMessages.Response response = ProtocolBufferMessages.Response.newBuilder()
+                    .setType(ProtocolBufferMessages.Response.Type.LOGIN)
                     .setLoginResponse(loginResponse)
                     .build();
 
             user.send(response);
         }
 
-        private void processServerTimeRequest(User user, AlluviumProtocol.ServerTimeRequest serverTimeRequest) {
-            AlluviumProtocol.ServerTimeResponse serverTimeResponse =
-                    AlluviumProtocol.ServerTimeResponse.newBuilder()
-                            .setRequestId(serverTimeRequest.getRequestId())
+        private void processServerTimeRequest(User user, ProtocolBufferMessages.ServerTimeRequest serverTimeRequest) {
+            ProtocolBufferMessages.ServerTimeResponse serverTimeResponse =
+                    ProtocolBufferMessages.ServerTimeResponse.newBuilder()
+                            .setTransactionId(serverTimeRequest.getTransactionId())
                             .setServerTime(Instant.now().toString())
                             .build();
 
-            AlluviumProtocol.Response response = AlluviumProtocol.Response.newBuilder()
-                    .setType(AlluviumProtocol.Response.Type.SERVERTIME)
+            ProtocolBufferMessages.Response response = ProtocolBufferMessages.Response.newBuilder()
+                    .setType(ProtocolBufferMessages.Response.Type.SERVERTIME)
                     .setServerTime(serverTimeResponse)
                     .build();
 

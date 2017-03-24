@@ -1,7 +1,7 @@
-package com.codeahoy.alluvium.server.resolution;
+package com.codeahoy.rocksolid.server.resolution;
 
-import com.codeahoy.alluvium.server.common.ServerId;
-import com.codeahoy.alluvium.server.common.UserId;
+import com.codeahoy.rocksolid.server.common.ServerId;
+import com.codeahoy.rocksolid.server.common.UserId;
 
 /**
  *
